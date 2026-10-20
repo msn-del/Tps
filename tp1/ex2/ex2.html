@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<script src="ex2.js"></script>
+<title>Ex2</title>
+</head>
+<body>
+<h1>Vérification d'email</h1>
+<label>Email : <input type="text" id="email"></label>
+<button type="button" onclick="verifier()">Vérifier</button>
+<p id="message"></p>
+
+<script>
+function emailValide(email) {
+  var posAt = email.indexOf("@");
+
+
+  if (posAt === -1 || posAt !== email.lastIndexOf("@")) return false;
+
+  var avant = email.substring(0, posAt);
+  var ok = false;
+  for (var i = 0; i < avant.length; i++) {
+    var c = avant.charAt(i);
+    if ((c >= "a" && c <= "z") || (c >= "A" && c <= "Z") || (c >= "0" && c <= "9")) {
+      ok = true;
+      break;
+    }
+  }
+  if (!ok) return false;
+
+  var apres = email.substring(posAt + 1);
+  var posPoint = apres.indexOf(".");
+  if (posPoint < 1 || posPoint === apres.length - 1) return false;
+
+  return true;
+}
+
+function verifier() {
+  var email = document.getElementById("email").value;
+  var msg = document.getElementById("message");
+  if (emailValide(email)) {
+    msg.innerHTML = "L'email est valide.";
+  } else {
+    msg.innerHTML = "L'email n'est pas valide.";
+  }
+}
+</script>
+</body>
+</html>

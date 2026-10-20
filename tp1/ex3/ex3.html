@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Ex3</title>
+<script src="ex3.js"></script>
+</head>
+<body>
+<h1>Tri d'une liste de nombres</h1>
+<label>Nombres (séparés par des virgules) : <input type="text" id="liste" value="5, 3, 9, 1, 7"></label>
+<button type="button" onclick="lancer()">Trier</button>
+<p id="resultat"></p>
+
+<script>
+function trier(tab) {
+  var t = tab.slice(); // copie pour ne pas modifier l'original
+  for (var i = 0; i < t.length - 1; i++) {
+    for (var j = 0; j < t.length - 1 - i; j++) {
+      if (t[j] > t[j + 1]) {
+        var temp = t[j];
+        t[j] = t[j + 1];
+        t[j + 1] = temp;
+      }
+    }
+  }
+  return t;
+}
+
+function lancer() {
+  var morceaux = document.getElementById("liste").value.split(",");
+  var nombres = [];
+  for (var i = 0; i < morceaux.length; i++) {
+    var n = parseFloat(morceaux[i]);
+    if (!isNaN(n)) nombres.push(n);
+  }
+  document.getElementById("resultat").innerHTML =
+    "Liste triée : " + trier(nombres).join(", ");
+}
+</script>
+</body>
+</html>

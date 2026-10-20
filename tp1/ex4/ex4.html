@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<script src="ex4.js"></script>
+<title>Ex4</title>
+</head>
+<body>
+<form id="f">
+  Entrer le premier temps :<br>
+  Heure(s) <input type="text" id="h1" size="8">
+  Minute(s) <input type="text" id="m1" size="8">
+  Seconde(s) <input type="text" id="s1" size="8"><br>
+
+  Entrer le deuxième temps :<br>
+  Heure(s) <input type="text" id="h2" size="8">
+  Minute(s) <input type="text" id="m2" size="8">
+  Seconde(s) <input type="text" id="s2" size="8"><br>
+
+  Entrer le troisième temps :<br>
+  Heure(s) <input type="text" id="h3" size="8">
+  Minute(s) <input type="text" id="m3" size="8">
+  Seconde(s) <input type="text" id="s3" size="8"><br>
+
+  Total des trois temps :<br>
+  Jour(s) <input type="text" id="jt" size="6" readonly>
+  Heure(s) <input type="text" id="ht" size="6" readonly>
+  Minute(s) <input type="text" id="mt" size="6" readonly>
+  Seconde(s) <input type="text" id="st" size="6" readonly><br><br>
+
+  <button type="button" onclick="somme()">Somme</button>
+  <button type="button" onclick="effacer()">Effacer</button>
+</form>
+
+<script>
+function valeur(id) {
+  var v = parseInt(document.getElementById(id).value, 10);
+  return isNaN(v) ? 0 : v;
+}
+
+function somme() {
+  var totalSecondes = 0;
+  for (var i = 1; i <= 3; i++) {
+    totalSecondes += valeur("h" + i) * 3600 + valeur("m" + i) * 60 + valeur("s" + i);
+  }
+
+  var jours = Math.floor(totalSecondes / 86400);
+  var reste = totalSecondes % 86400;
+  var heures = Math.floor(reste / 3600);
+  reste = reste % 3600;
+  var minutes = Math.floor(reste / 60);
+  var secondes = reste % 60;
+
+  document.getElementById("jt").value = jours;
+  document.getElementById("ht").value = heures;
+  document.getElementById("mt").value = minutes;
+  document.getElementById("st").value = secondes;
+}
+
+function effacer() {
+  document.getElementById("f").reset();
+  document.getElementById("jt").value = "";
+  document.getElementById("ht").value = "";
+  document.getElementById("mt").value = "";
+  document.getElementById("st").value = "";
+}
+</script>
+</body>
+</html>
